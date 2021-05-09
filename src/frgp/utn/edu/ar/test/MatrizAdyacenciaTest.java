@@ -5,13 +5,15 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+//import org.junit.Test;
 import frgp.utn.edu.ar.main.MatrizAdyacencia;
 
 class MatrizAdyacenciaTest {
 	
-	private MatrizAdyacencia matriz = new MatrizAdyacencia(6);
 	private int i=2;
 	private int j=3;
+	private int rango=6;
+	private MatrizAdyacencia matriz = new MatrizAdyacencia(rango);
 
 	@AfterEach
 	public void limpiarMatriz(){
@@ -65,6 +67,28 @@ class MatrizAdyacenciaTest {
 		assertTrue(matriz.existeElemento(4,1));
 		assertTrue(matriz.existeElemento(1,2));
 		assertTrue(matriz.existeElemento(2,1));
+	}
+	
+	
+	@Test
+	public void agregarElementoFilaNegativaTest(){
+		assertThrows(Exception.class, () -> {
+			matriz.agregarElemento(-i,j);
+		});
+	}
+	
+	@Test
+	public void agregarElementoColumnaNegativaTest(){
+		assertThrows(Exception.class, () -> {
+			matriz.agregarElemento(i,-j);
+		});
+	}
+
+	@Test
+	public void agregarElementoFueraRangoTest(){
+		assertThrows(Exception.class, () -> {
+			matriz.agregarElemento(rango+1,j);
+		});
 	}
 }
 
